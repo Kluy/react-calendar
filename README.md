@@ -9,8 +9,9 @@
 <ul>
     <li>React</li>
     <li>JS</li>
-    <li>CSS3</li>
+    <li>Webpack</li>
     <li>HTML5</li>
+    <li>CSS3</li>
     <li>Flexbox</li>
     <li>Sass (Scss)</li>
     <li>BEM methodology</li>

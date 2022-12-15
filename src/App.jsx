@@ -24,6 +24,7 @@ const App = () => {
   }
   
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+  
   const currentMonths = weekDates[0].getDate() < weekDates[6].getDate() ? moment(weekDates[0]).format('MMM') : moment(weekDates[0]).format('MMM') + '-' + moment(weekDates[6]).format('MMM')
 
   return (

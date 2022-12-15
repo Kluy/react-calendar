@@ -10,10 +10,10 @@ const Header = (props) => {
       </button>
       <div className="navigation">
         <button className="navigation__today-btn button">Today</button>
-        <button onClick={props.addWeek} className="icon-button navigation__nav-icon">
+        <button onClick={props.subtractWeek} className="icon-button navigation__nav-icon">
           <i className="fas fa-chevron-left"></i>
         </button>
-        <button onClick={() => {}} className="icon-button navigation__nav-icon">
+        <button onClick={props.addWeek} className="icon-button navigation__nav-icon">
           <i className="fas fa-chevron-right"></i>
         </button>
         <span className="navigation__displayed-month"></span>

@@ -12,14 +12,16 @@ const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date())
   
   const handleWeekNext = () => {
-    setWeekStartDate(new Date(weekStartDate));
+    setWeekStartDate(new Date(moment(weekStartDate).add(7, 'days')));
   }
-  const handleWeekPrevious = () => {}
+  const handleWeekPrevious = () => {
+    setWeekStartDate(new Date(moment(weekStartDate).subtract(7, 'days')));
+  }
   
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
   return (
     <>
-      <Header addWeek={handleWeekNext} />
+      <Header addWeek={handleWeekNext} subtractWeek={handleWeekPrevious} />
       <Calendar weekDates={weekDates} />
     </>
   );

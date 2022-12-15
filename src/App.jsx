@@ -19,6 +19,7 @@ const App = () => {
   }
   
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+  
   return (
     <>
       <Header addWeek={handleWeekNext} subtractWeek={handleWeekPrevious} />

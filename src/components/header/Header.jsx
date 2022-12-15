@@ -9,14 +9,14 @@ const Header = (props) => {
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>
       <div className="navigation">
-        <button className="navigation__today-btn button">Today</button>
-        <button onClick={props.subtractWeek} className="icon-button navigation__nav-icon">
+        <button onClick={props.onSetCurrentWeek} className="navigation__today-btn button">Today</button>
+        <button onClick={props.onSubtractWeek} className="icon-button navigation__nav-icon">
           <i className="fas fa-chevron-left"></i>
         </button>
-        <button onClick={props.addWeek} className="icon-button navigation__nav-icon">
+        <button onClick={props.onAddWeek} className="icon-button navigation__nav-icon">
           <i className="fas fa-chevron-right"></i>
         </button>
-        <span className="navigation__displayed-month"></span>
+        <span className="navigation__displayed-month">{props.currentMonths}</span>
       </div>
     </header>
   );

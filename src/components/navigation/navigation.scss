@@ -19,11 +19,21 @@
 .day-label {
   &__day-number {
     padding: 10px;
+
+    &_current {
+      color: #fff;
+      border-radius: 100%;
+      background-color: #003dff;
+    }
   }
 
-  &__current-day {
-    color: #fff;
-    border-radius: 100%;
-    background-color: #003dff;
+  &__day-name {
+    padding-bottom: 4px;
+
+    &_current {
+      font-weight: 700;
+      color: #003dff;
+    }
   }
+
 }

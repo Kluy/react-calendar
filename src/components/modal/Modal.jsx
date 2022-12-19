@@ -26,12 +26,14 @@ const Modal = (props) => {
                 type="date"
                 name="date"
                 className="event-form__field"
+                value={props.eventData.date}
                 onChange={props.onSetEventData}
               />
               <input
                 type="time"
                 name="startTime"
                 className="event-form__field"
+                value={props.eventData.startTime}
                 onChange={props.onSetEventData}
               />
               <span>-</span>
@@ -39,6 +41,7 @@ const Modal = (props) => {
                 type="time"
                 name="endTime"
                 className="event-form__field"
+                value={props.eventData.endTime}
                 onChange={props.onSetEventData}
               />
             </div>

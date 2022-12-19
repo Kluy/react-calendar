@@ -20,7 +20,6 @@ const App = () => {
   });
 
   const handleSetEventData = (e) => {
-    console.log(eventData);
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
 

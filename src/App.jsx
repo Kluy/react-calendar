@@ -11,6 +11,18 @@ import './common.scss';
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [eventData, setEventData] = useState({
+    title: '',
+    description: '',
+    date: '',
+    startTime: '',
+    endTime: '',
+  });
+
+  const handleSetEventData = (e) => {
+    console.log(eventData);
+    setEventData({ ...eventData, [e.target.name]: e.target.value });
+  };
 
   const handleAddWeek = () => {
     setWeekStartDate(new Date(moment(weekStartDate).add(7, 'days')));
@@ -46,7 +58,13 @@ const App = () => {
         onSubtractWeek={handleSubtractWeek}
       />
       <Calendar weekDates={weekDates} />
-      {isModalOpen ? <Modal onIsModalOpen={handleIsModalOpen} /> : null}
+      {isModalOpen ? (
+        <Modal
+          eventData={eventData}
+          onSetEventData={handleSetEventData}
+          onIsModalOpen={handleIsModalOpen}
+        />
+      ) : null}
     </>
   );
 };

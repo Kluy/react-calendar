@@ -28,7 +28,7 @@ const Header = (props) => {
           <i className="fas fa-chevron-right"></i>
         </button>
         <span className="navigation__displayed-month">
-          {props.currentMonths}
+          {props.currentMonthName}
         </span>
       </div>
     </header>

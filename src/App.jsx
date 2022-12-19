@@ -41,7 +41,7 @@ const App = () => {
 
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
 
-  const currentMonths =
+  const currentMonthName =
     weekDates[0].getDate() < weekDates[6].getDate()
       ? moment(weekDates[0]).format('MMM')
       : moment(weekDates[0]).format('MMM') +
@@ -51,7 +51,7 @@ const App = () => {
   return (
     <>
       <Header
-        currentMonths={currentMonths}
+        currentMonthName={currentMonthName}
         onIsModalOpen={handleIsModalOpen}
         onSetCurrentWeek={handleSetCurrentWeek}
         onAddWeek={handleAddWeek}

@@ -1,32 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Navigation from './../navigation/Navigation';
 import Week from '../week/Week';
 import Sidebar from '../sidebar/Sidebar';
-import events from '../../gateway/events';
+// import events from '../../gateway/events';
+import { useState } from 'react';
+import { fetchData } from '../../gateway/gateway';
 
 import './calendar.scss';
 
-class Calendar extends Component {
-  state = {
-    events,
-  };
+const Calendar = ({ weekDates }) => {
+  const [events, setEvents] = useState([]);
 
-  render() {
-    const { weekDates } = this.props;
+  // fetchData().then((result) => {
+  //   console.log(result), setEvents(result);
+  // });
+  // console.log(events);
 
-    return (
-      <section className="calendar">
-        <Navigation weekDates={weekDates} />
-        <div className="calendar__body">
-          <div className="calendar__week-container">
-            <Sidebar />
-            <Week weekDates={weekDates} events={this.state.events} />
-          </div>
+  return (
+    <section className="calendar">
+      <Navigation weekDates={weekDates} />
+      <div className="calendar__body">
+        <div className="calendar__week-container">
+          <Sidebar />
+          <Week weekDates={weekDates} events={events} />
         </div>
-      </section>
-    );
-  }
-}
+      </div>
+    </section>
+  );
+};
 
 export default Calendar;

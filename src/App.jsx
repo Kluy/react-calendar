@@ -22,17 +22,20 @@ const App = () => {
   const [events, setEvents] = useState([]);
 
   const getEvents = () => {
-    fetchData().then((result) =>
-      setEvents({
-        ...result,
-        dateFrom: new Date(result.dateFrom),
-        dateTo: new Date(result.dateTo),
-      })
-    );
+    fetchData().then((result) => {
+      setEvents(
+        result.map((event) => {
+          return {
+            ...event,
+            dateFrom: new Date(event.dateFrom),
+            dateTo: new Date(event.dateTo),
+          };
+        })
+      );
+    });
   };
 
   useEffect(() => {
-    console.log('useEffect');
     getEvents();
   }, []);
 

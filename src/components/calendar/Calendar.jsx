@@ -4,7 +4,7 @@ import Navigation from './../navigation/Navigation';
 import Week from '../week/Week';
 import Sidebar from '../sidebar/Sidebar';
 // import events from '../../gateway/events';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchData } from '../../gateway/gateway';
 
 import './calendar.scss';
@@ -12,10 +12,11 @@ import './calendar.scss';
 const Calendar = ({ weekDates }) => {
   const [events, setEvents] = useState([]);
 
-  // fetchData().then((result) => {
-  //   console.log(result), setEvents(result);
-  // });
-  // console.log(events);
+  useEffect(() => {
+    // fetchData().then((result) => {
+    //   console.log(result), setEvents(result);
+    // });
+  }, []);
 
   return (
     <section className="calendar">

@@ -53,9 +53,9 @@ const Modal = (props) => {
               onChange={props.onSetEventData}
             ></textarea>
             <button
-              onClick={() => {}}
               type="submit"
               className="event-form__submit-btn"
+              onClick={props.onCreateEvent}
             >
               Create
             </button>

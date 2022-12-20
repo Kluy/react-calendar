@@ -3,6 +3,7 @@ import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
 import Modal from './components/modal/Modal.jsx';
 import moment from 'moment';
+import { postEvent } from './gateway/gateway.js';
 
 import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 
@@ -19,8 +20,26 @@ const App = () => {
     endTime: '',
   });
 
+  const handleCreateEvent = (e) => {
+    e.preventDefault();
+    const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
+    const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
+    const { title, description } = eventData;
+    postEvent({
+      title,
+      description,
+      dateFrom,
+      dateTo,
+    });
+    setIsModalOpen(!isModalOpen);
+  };
+
   const handleSetEventData = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
+  };
+
+  const handleSetCurrentWeek = () => {
+    setWeekStartDate(new Date());
   };
 
   const handleAddWeek = () => {
@@ -28,10 +47,6 @@ const App = () => {
   };
   const handleSubtractWeek = () => {
     setWeekStartDate(new Date(moment(weekStartDate).subtract(7, 'days')));
-  };
-
-  const handleSetCurrentWeek = () => {
-    setWeekStartDate(new Date());
   };
 
   const handleIsModalOpen = () => {
@@ -59,6 +74,7 @@ const App = () => {
       <Calendar weekDates={weekDates} />
       {isModalOpen ? (
         <Modal
+          onCreateEvent={handleCreateEvent}
           eventData={eventData}
           onSetEventData={handleSetEventData}
           onIsModalOpen={handleIsModalOpen}

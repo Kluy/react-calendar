@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
 import Modal from './components/modal/Modal.jsx';
 import moment from 'moment';
-import { postEvent } from './gateway/gateway.js';
+import { fetchData, postEvent } from './gateway/gateway.js';
 
 import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 
@@ -19,6 +19,22 @@ const App = () => {
     startTime: '',
     endTime: '',
   });
+  const [events, setEvents] = useState([]);
+
+  const getEvents = () => {
+    fetchData().then((result) =>
+      setEvents({
+        ...result,
+        dateFrom: new Date(result.dateFrom),
+        dateTo: new Date(result.dateTo),
+      })
+    );
+  };
+
+  useEffect(() => {
+    console.log('useEffect');
+    getEvents();
+  }, []);
 
   const handleCreateEvent = (e) => {
     e.preventDefault();
@@ -30,7 +46,7 @@ const App = () => {
       description,
       dateFrom,
       dateTo,
-    });
+    }).then(() => getEvents());
     setIsModalOpen(!isModalOpen);
   };
 
@@ -71,7 +87,7 @@ const App = () => {
         onAddWeek={handleAddWeek}
         onSubtractWeek={handleSubtractWeek}
       />
-      <Calendar weekDates={weekDates} />
+      <Calendar events={events} weekDates={weekDates} />
       {isModalOpen ? (
         <Modal
           onCreateEvent={handleCreateEvent}

@@ -2,15 +2,7 @@ import React from 'react';
 
 import './event.scss';
 
-const Event = ({
-  height,
-  marginTop,
-  title,
-  time,
-  description,
-  onOpenPopup,
-  eventId,
-}) => {
+const Event = ({ height, marginTop, title, time, onOpenPopup, eventId }) => {
   return (
     <>
       <div
@@ -20,7 +12,6 @@ const Event = ({
       >
         <div className="event__title">{title}</div>
         <div className="event__time">{time}</div>
-        <div className="">{description}</div>
       </div>
     </>
   );

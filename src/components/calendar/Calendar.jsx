@@ -8,13 +8,13 @@ import { deleteEvent } from '../../gateway/gateway';
 
 import './calendar.scss';
 
-const Calendar = ({ weekDates, events }) => {
+const Calendar = ({ weekDates, events, onGetEvents }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupOpenCoordinates, setPopupOpenCoordinates] = useState({});
   const [eventIdToDelete, setEventIdToDelete] = useState();
 
   const handleDeleteEvent = () => {
-    deleteEvent(eventIdToDelete);
+    deleteEvent(eventIdToDelete).then(() => onGetEvents());
     setIsPopupOpen(!isPopupOpen);
   };
 

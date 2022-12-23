@@ -37,6 +37,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    console.log(events.length);
     getEvents();
   }, []);
 
@@ -58,6 +59,10 @@ const App = () => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
 
+  const handleIsModalOpen = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   const handleSetCurrentWeek = () => {
     setWeekStartDate(new Date());
   };
@@ -67,10 +72,6 @@ const App = () => {
   };
   const handleSubtractWeek = () => {
     setWeekStartDate(new Date(moment(weekStartDate).subtract(7, 'days')));
-  };
-
-  const handleIsModalOpen = () => {
-    setIsModalOpen(!isModalOpen);
   };
 
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
@@ -91,7 +92,7 @@ const App = () => {
         onAddWeek={handleAddWeek}
         onSubtractWeek={handleSubtractWeek}
       />
-      <Calendar events={events} weekDates={weekDates} />
+      <Calendar onGetEvents={getEvents} events={events} weekDates={weekDates} />
       {isModalOpen ? (
         <Modal
           onCreateEvent={handleCreateEvent}

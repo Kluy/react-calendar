@@ -19,6 +19,7 @@ const App = () => {
     startTime: '',
     endTime: '',
   });
+
   const [events, setEvents] = useState([]);
 
   const getEvents = () => {

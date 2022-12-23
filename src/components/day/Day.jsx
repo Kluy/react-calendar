@@ -3,7 +3,7 @@ import Hour from '../hour/Hour';
 
 import './day.scss';
 
-const Day = ({ dataDay, dayEvents }) => {
+const Day = ({ dataDay, dayEvents, onOpenPopup, onGetEventId }) => {
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
@@ -17,7 +17,13 @@ const Day = ({ dataDay, dayEvents }) => {
         );
 
         return (
-          <Hour key={dataDay + hour} dataHour={hour} hourEvents={hourEvents} />
+          <Hour
+            onGetEventId={onGetEventId}
+            onOpenPopup={onOpenPopup}
+            key={dataDay + hour}
+            dataHour={hour}
+            hourEvents={hourEvents}
+          />
         );
       })}
     </div>

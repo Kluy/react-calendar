@@ -26,6 +26,7 @@ const Day = ({ dataDay, dayEvents, onOpenPopup, onGetEventId }) => {
           />
         );
       })}
+      {dataDay === new Date().getDate() && <div className="line"></div>}
     </div>
   );
 };

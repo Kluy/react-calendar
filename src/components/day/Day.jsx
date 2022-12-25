@@ -6,9 +6,10 @@ import { deleteEvent } from '../../gateway/gateway';
 import './day.scss';
 
 const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
-  const dayHours = new Date().getHours();
-  const minutes = new Date().getMinutes();
-  const [top, setTop] = useState(dayHours * 60 - dayHours + minutes);
+  const currentHours = new Date().getHours();
+  const [top, setTop] = useState(
+    currentHours * 60 - currentHours + new Date().getMinutes()
+  );
 
   const hours = Array(24)
     .fill()

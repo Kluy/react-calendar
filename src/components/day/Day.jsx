@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Hour from '../hour/Hour';
 import Line from '../Line/Line';
+import Popup from '../popup/Popup';
+import { deleteEvent } from '../../gateway/gateway';
 
 import './day.scss';
 
-const Day = ({ dataDay, dayEvents, onOpenPopup, onGetEventId }) => {
+const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
   const currentHours = new Date().getHours();
   const minutes = new Date().getMinutes();
 
@@ -23,6 +25,30 @@ const Day = ({ dataDay, dayEvents, onOpenPopup, onGetEventId }) => {
   // }
   console.log('day');
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupOpenCoordinates, setPopupOpenCoordinates] = useState({});
+  const [eventIdToDelete, setEventIdToDelete] = useState();
+
+  const handleDeleteEvent = () => {
+    deleteEvent(eventIdToDelete).then(() => onGetEvents());
+    setIsPopupOpen(false);
+  };
+
+  const handleOpenPopup = (e, eventId) => {
+    console.log(e);
+    setPopupOpenCoordinates({
+      top: e.pageY,
+      left: e.pageX,
+    });
+    setEventIdToDelete(eventId);
+    setIsPopupOpen(!isPopupOpen);
+  };
+  console.log(popupOpenCoordinates);
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <div className="calendar__day" data-day={dataDay}>
       {hours.map((hour) => {
@@ -34,13 +60,21 @@ const Day = ({ dataDay, dayEvents, onOpenPopup, onGetEventId }) => {
         return (
           <Hour
             onGetEventId={onGetEventId}
-            onOpenPopup={onOpenPopup}
+            onOpenPopup={handleOpenPopup}
             key={dataDay + hour}
             dataHour={hour}
             hourEvents={hourEvents}
           />
         );
       })}
+      {isPopupOpen && (
+        <Popup
+          onClosePopup={closePopup}
+          onGetEvents={onGetEvents}
+          popupOpenCoordinates={popupOpenCoordinates}
+          onDeleteEvent={handleDeleteEvent}
+        />
+      )}
       {/* {dataDay === new Date().getDate() && (
         <div style={{ top: styles.top }} className="line"></div>
       )} */}

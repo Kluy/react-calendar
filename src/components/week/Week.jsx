@@ -3,7 +3,7 @@ import Day from '../day/Day';
 
 import './week.scss';
 
-const Week = ({ weekDates, events, onOpenPopup }) => {
+const Week = ({ weekDates, events, onOpenPopup, onGetEvents }) => {
   console.log('week');
 
   return (
@@ -19,6 +19,7 @@ const Week = ({ weekDates, events, onOpenPopup }) => {
         });
         return (
           <Day
+            onGetEvents={onGetEvents}
             onOpenPopup={onOpenPopup}
             key={dayStart.getDate()}
             dataDay={dayStart.getDate()}

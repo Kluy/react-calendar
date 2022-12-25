@@ -3,6 +3,8 @@ import React from 'react';
 import './header.scss';
 
 const Header = (props) => {
+  console.log('header');
+
   return (
     <header className="header">
       <button onClick={props.onIsModalOpen} className="button create-event-btn">

@@ -12,13 +12,6 @@ import './common.scss';
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [eventData, setEventData] = useState({
-    title: '',
-    description: '',
-    date: '',
-    startTime: '',
-    endTime: '',
-  });
 
   const [events, setEvents] = useState([]);
 
@@ -39,24 +32,6 @@ const App = () => {
   useEffect(() => {
     getEvents();
   }, []);
-
-  const handleCreateEvent = (e) => {
-    e.preventDefault();
-    const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
-    const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
-    const { title, description } = eventData;
-    postEvent({
-      title,
-      description,
-      dateFrom,
-      dateTo,
-    }).then(() => getEvents());
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const handleSetEventData = (e) => {
-    setEventData({ ...eventData, [e.target.name]: e.target.value });
-  };
 
   const handleIsModalOpen = () => {
     setIsModalOpen(!isModalOpen);
@@ -82,25 +57,27 @@ const App = () => {
         ' - ' +
         moment(weekDates[6]).format('MMM');
 
+  console.log('app');
   return (
-    <>
-      <Header
-        currentMonthName={currentMonthName}
-        onIsModalOpen={handleIsModalOpen}
-        onSetCurrentWeek={handleSetCurrentWeek}
-        onAddWeek={handleAddWeek}
-        onSubtractWeek={handleSubtractWeek}
-      />
-      <Calendar onGetEvents={getEvents} events={events} weekDates={weekDates} />
-      {isModalOpen ? (
-        <Modal
-          onCreateEvent={handleCreateEvent}
-          eventData={eventData}
-          onSetEventData={handleSetEventData}
+    events.length > 0 && (
+      <>
+        <Header
+          currentMonthName={currentMonthName}
           onIsModalOpen={handleIsModalOpen}
+          onSetCurrentWeek={handleSetCurrentWeek}
+          onAddWeek={handleAddWeek}
+          onSubtractWeek={handleSubtractWeek}
         />
-      ) : null}
-    </>
+        <Calendar
+          onGetEvents={getEvents}
+          events={events}
+          weekDates={weekDates}
+        />
+        {isModalOpen ? (
+          <Modal onGetEvents={getEvents} onIsModalOpen={handleIsModalOpen} />
+        ) : null}
+      </>
+    )
   );
 };
 

@@ -26,6 +26,7 @@ const Calendar = ({ weekDates, events, onGetEvents }) => {
     setEventIdToDelete(eventId);
     setIsPopupOpen(!isPopupOpen);
   };
+  console.log('calendar');
 
   return (
     <section className="calendar">

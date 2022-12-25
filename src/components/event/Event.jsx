@@ -3,6 +3,8 @@ import React from 'react';
 import './event.scss';
 
 const Event = ({ height, marginTop, title, time, onOpenPopup, eventId }) => {
+  console.log('event');
+
   return (
     <>
       <div

@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
 import Hour from '../hour/Hour';
-import Line from '../Line/Line';
 import Popup from '../popup/Popup';
 import { deleteEvent } from '../../gateway/gateway';
 
 import './day.scss';
 
 const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
-  const currentHours = new Date().getHours();
+  const dayHours = new Date().getHours();
   const minutes = new Date().getMinutes();
-
-  const styles = {
-    top: currentHours * 60 - currentHours + minutes,
-  };
+  const [top, setTop] = useState(dayHours * 60 - dayHours + minutes);
 
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
 
-  // if (dataDay === new Date().getDate()) {
-  //   setInterval(() => {
-  //     styles.top += 1;
-  //   }, 1000);
-  // }
+  if (dataDay === new Date().getDate()) {
+    setTimeout(() => setTop(top + 1), 60000);
+  }
   console.log('day');
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -43,7 +37,6 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
     setEventIdToDelete(eventId);
     setIsPopupOpen(!isPopupOpen);
   };
-  console.log(popupOpenCoordinates);
 
   const closePopup = () => {
     setIsPopupOpen(false);
@@ -56,7 +49,6 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
         const hourEvents = dayEvents.filter(
           (event) => event.dateFrom.getHours() === hour
         );
-
         return (
           <Hour
             onGetEventId={onGetEventId}
@@ -75,10 +67,9 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
           onDeleteEvent={handleDeleteEvent}
         />
       )}
-      {/* {dataDay === new Date().getDate() && (
-        <div style={{ top: styles.top }} className="line"></div>
-      )} */}
-      {dataDay === new Date().getDate() && <Line />}
+      {dataDay === new Date().getDate() && (
+        <div style={{ top }} className="line"></div>
+      )}
     </div>
   );
 };

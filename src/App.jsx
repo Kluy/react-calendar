@@ -3,7 +3,7 @@ import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
 import Modal from './components/modal/Modal.jsx';
 import moment from 'moment';
-import { fetchData, postEvent } from './gateway/gateway.js';
+import { fetchData } from './gateway/gateway.js';
 
 import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 

@@ -22,8 +22,4 @@ Popup.propTypes = {
   onClosePopup: PropTypes.func.isRequired,
 };
 
-Popup.defaultProps = {
-  input: '',
-};
-
 export default Popup;

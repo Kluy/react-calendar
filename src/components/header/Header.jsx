@@ -1,40 +1,57 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './header.scss';
 
-const Header = (props) => {
+const Header = ({
+  onIsModalOpen,
+  onSetCurrentWeek,
+  onSubtractWeek,
+  onAddWeek,
+  currentMonthName,
+}) => {
   console.log('header');
 
   return (
     <header className="header">
-      <button onClick={props.onIsModalOpen} className="button create-event-btn">
+      <button onClick={onIsModalOpen} className="button create-event-btn">
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>
       <div className="navigation">
         <button
-          onClick={props.onSetCurrentWeek}
+          onClick={onSetCurrentWeek}
           className="navigation__today-btn button"
         >
           Today
         </button>
         <button
-          onClick={props.onSubtractWeek}
+          onClick={onSubtractWeek}
           className="icon-button navigation__nav-icon"
         >
           <i className="fas fa-chevron-left"></i>
         </button>
         <button
-          onClick={props.onAddWeek}
+          onClick={onAddWeek}
           className="icon-button navigation__nav-icon"
         >
           <i className="fas fa-chevron-right"></i>
         </button>
-        <span className="navigation__displayed-months">
-          {props.currentMonthName}
-        </span>
+        <span className="navigation__displayed-months">{currentMonthName}</span>
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  currentMonthName: PropTypes.string,
+  onIsModalOpen: PropTypes.func.isRequired,
+  onSetCurrentWeek: PropTypes.func.isRequired,
+  onSubtractWeek: PropTypes.func.isRequired,
+  onAddWeek: PropTypes.func.isRequired,
+};
+
+Header.defaultProps = {
+  currentMonthName: '',
 };
 
 export default Header;

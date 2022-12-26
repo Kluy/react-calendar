@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { postEvent } from '../../gateway/gateway';
+import PropTypes from 'prop-types';
 import './modal.scss';
 
-const Modal = (props) => {
+const Modal = ({ onIsModalOpen, onGetEvents }) => {
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -21,8 +22,8 @@ const Modal = (props) => {
       description,
       dateFrom,
       dateTo,
-    }).then(() => props.onGetEvents());
-    props.onIsModalOpen();
+    }).then(() => onGetEvents());
+    onIsModalOpen();
   };
 
   const handleSetEventData = (e) => {
@@ -33,10 +34,7 @@ const Modal = (props) => {
     <div className="modal overlay">
       <div className="modal__content">
         <div className="create-event">
-          <button
-            onClick={props.onIsModalOpen}
-            className="create-event__close-btn"
-          >
+          <button onClick={onIsModalOpen} className="create-event__close-btn">
             +
           </button>
           <form className="event-form">
@@ -91,6 +89,11 @@ const Modal = (props) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  onIsModalOpen: PropTypes.func.isRequired,
+  onGetEvents: PropTypes.func.isRequired,
 };
 
 export default Modal;

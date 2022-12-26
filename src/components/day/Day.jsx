@@ -21,8 +21,6 @@ const Day = ({ dataDay, dayEvents, onGetEvents }) => {
     .fill()
     .map((val, index) => index);
 
-  console.log('day');
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupCoordinates, setPopupCoordinates] = useState({});
   const [eventIdToDelete, setEventIdToDelete] = useState();
@@ -65,7 +63,7 @@ const Day = ({ dataDay, dayEvents, onGetEvents }) => {
         <Popup
           onClosePopup={closePopup}
           onGetEvents={onGetEvents}
-          // popupCoordinates={popupCoordinates}
+          popupCoordinates={popupCoordinates}
           onDeleteEvent={handleDeleteEvent}
         />
       )}

@@ -8,8 +8,6 @@ import PropTypes from 'prop-types';
 import './calendar.scss';
 
 const Calendar = ({ weekDates, events, onGetEvents }) => {
-  console.log('calendar');
-
   return (
     <section className="calendar">
       <Navigation weekDates={weekDates} />

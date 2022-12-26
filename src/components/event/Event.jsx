@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import './event.scss';
 
 const Event = ({ height, marginTop, title, time, eventId, onOpenPopup }) => {
-  console.log('event');
-
   return (
     <>
       <div

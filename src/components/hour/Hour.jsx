@@ -5,8 +5,6 @@ import Event from '../event/Event';
 import { formatMins } from '../../../src/utils/dateUtils.js';
 
 const Hour = ({ dataHour, hourEvents, onOpenPopup }) => {
-  console.log('hour');
-
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1}>
       {/* if no events in the current hour nothing will render here */}

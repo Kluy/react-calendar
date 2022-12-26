@@ -7,7 +7,6 @@ import './navigation.scss';
 
 const Navigation = ({ weekDates }) => {
   const currentDay = new Date().getDate();
-  console.log('navigation');
 
   return (
     <header className="calendar__header">

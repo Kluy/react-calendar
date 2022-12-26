@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import './week.scss';
 
 const Week = ({ weekDates, events, onGetEvents }) => {
-  console.log('week');
-
   return (
     <div className="calendar__week">
       {weekDates.map((dayStart) => {

@@ -57,7 +57,6 @@ const App = () => {
         ' - ' +
         moment(weekDates[6]).format('MMM');
 
-  console.log('app');
   return (
     <>
       <Header

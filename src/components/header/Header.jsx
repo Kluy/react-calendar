@@ -10,8 +10,6 @@ const Header = ({
   onAddWeek,
   currentMonthName,
 }) => {
-  console.log('header');
-
   return (
     <header className="header">
       <button onClick={onIsModalOpen} className="button create-event-btn">

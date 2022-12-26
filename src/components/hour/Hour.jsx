@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Event from '../event/Event';
 import { formatMins } from '../../../src/utils/dateUtils.js';
 
 const Hour = ({ dataHour, hourEvents, onOpenPopup }) => {
   console.log('hour');
+  console.log(hourEvents);
 
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1}>
@@ -32,6 +34,16 @@ const Hour = ({ dataHour, hourEvents, onOpenPopup }) => {
       })}
     </div>
   );
+};
+
+Hour.propTypes = {
+  dataHour: PropTypes.number.isRequired,
+  hourEvents: PropTypes.arrayOf(PropTypes.object),
+  onOpenPopup: PropTypes.func.isRequired,
+};
+
+Hour.defaultProps = {
+  hourEvents: [],
 };
 
 export default Hour;

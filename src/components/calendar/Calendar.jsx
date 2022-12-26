@@ -26,4 +26,14 @@ const Calendar = ({ weekDates, events, onGetEvents }) => {
   );
 };
 
+Calendar.propTypes = {
+  weekDates: PropTypes.arrayOf(PropTypes.object),
+  events: PropTypes.array,
+  onGetEvents: PropTypes.func.isRequired,
+};
+
+Calendar.defaultProps = {
+  events: [],
+};
+
 export default Calendar;

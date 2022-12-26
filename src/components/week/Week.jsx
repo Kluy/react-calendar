@@ -34,6 +34,11 @@ const Week = ({ weekDates, events, onGetEvents }) => {
 Week.propTypes = {
   weekDates: PropTypes.arrayOf(PropTypes.object),
   events: PropTypes.arrayOf(PropTypes.object),
+  onGetEvents: PropTypes.func.isRequired,
+};
+
+Week.defaultProps = {
+  events: [],
 };
 
 export default Week;

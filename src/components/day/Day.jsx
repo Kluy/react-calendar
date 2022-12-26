@@ -31,9 +31,6 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
   };
 
   const handleOpenPopup = (e, eventId) => {
-    console.log(e);
-    console.log(e.pageY);
-    console.log(e.pageX);
     setPopupCoordinates({
       top: e.pageY,
       left: e.pageX,

@@ -59,25 +59,19 @@ const App = () => {
 
   console.log('app');
   return (
-    events.length > 0 && (
-      <>
-        <Header
-          currentMonthName={currentMonthName}
-          onIsModalOpen={handleIsModalOpen}
-          onSetCurrentWeek={handleSetCurrentWeek}
-          onAddWeek={handleAddWeek}
-          onSubtractWeek={handleSubtractWeek}
-        />
-        <Calendar
-          onGetEvents={getEvents}
-          events={events}
-          weekDates={weekDates}
-        />
-        {isModalOpen ? (
-          <Modal onGetEvents={getEvents} onIsModalOpen={handleIsModalOpen} />
-        ) : null}
-      </>
-    )
+    <>
+      <Header
+        currentMonthName={currentMonthName}
+        onIsModalOpen={handleIsModalOpen}
+        onSetCurrentWeek={handleSetCurrentWeek}
+        onAddWeek={handleAddWeek}
+        onSubtractWeek={handleSubtractWeek}
+      />
+      <Calendar onGetEvents={getEvents} events={events} weekDates={weekDates} />
+      {isModalOpen ? (
+        <Modal onGetEvents={getEvents} onIsModalOpen={handleIsModalOpen} />
+      ) : null}
+    </>
   );
 };
 

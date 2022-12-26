@@ -6,7 +6,6 @@ import { formatMins } from '../../../src/utils/dateUtils.js';
 
 const Hour = ({ dataHour, hourEvents, onOpenPopup }) => {
   console.log('hour');
-  console.log(hourEvents);
 
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1}>

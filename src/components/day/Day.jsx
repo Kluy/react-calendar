@@ -7,11 +7,13 @@ import { deleteEvent } from '../../gateway/gateway';
 import './day.scss';
 
 const Day = ({ dataDay, dayEvents, onGetEvents }) => {
+  const currentDay = dataDay === new Date().getDate();
   const currentHours = new Date().getHours();
   const [top, setTop] = useState(
     currentHours * 60 - currentHours + new Date().getMinutes()
   );
-  if (dataDay === new Date().getDate()) {
+
+  if (currentDay) {
     setTimeout(() => setTop(top + 1), 60000);
   }
 
@@ -36,7 +38,7 @@ const Day = ({ dataDay, dayEvents, onGetEvents }) => {
       left: e.pageX,
     });
     setEventIdToDelete(eventId);
-    setIsPopupOpen(!isPopupOpen);
+    setIsPopupOpen(true);
   };
 
   const closePopup = () => {
@@ -63,13 +65,11 @@ const Day = ({ dataDay, dayEvents, onGetEvents }) => {
         <Popup
           onClosePopup={closePopup}
           onGetEvents={onGetEvents}
-          popupCoordinates={popupCoordinates}
+          // popupCoordinates={popupCoordinates}
           onDeleteEvent={handleDeleteEvent}
         />
       )}
-      {dataDay === new Date().getDate() && (
-        <div style={{ top }} className="line"></div>
-      )}
+      {currentDay && <div style={{ top }} className="line"></div>}
     </div>
   );
 };

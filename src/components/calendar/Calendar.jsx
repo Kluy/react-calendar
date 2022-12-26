@@ -3,7 +3,6 @@ import React from 'react';
 import Navigation from './../navigation/Navigation';
 import Week from '../week/Week';
 import Sidebar from '../sidebar/Sidebar';
-
 import PropTypes from 'prop-types';
 
 import './calendar.scss';
@@ -36,6 +35,7 @@ Calendar.propTypes = {
 
 Calendar.defaultProps = {
   events: [],
+  weekDates: [],
 };
 
 export default Calendar;

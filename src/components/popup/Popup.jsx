@@ -17,7 +17,7 @@ const Popup = ({ popupCoordinates, onDeleteEvent, onClosePopup }) => {
 };
 
 Popup.propTypes = {
-  popupCoordinates: PropTypes.objectOf(PropTypes.number),
+  popupCoordinates: PropTypes.objectOf(PropTypes.number).isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
   onClosePopup: PropTypes.func.isRequired,
 };

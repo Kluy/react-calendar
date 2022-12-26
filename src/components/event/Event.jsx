@@ -4,7 +4,6 @@ import './event.scss';
 
 const Event = ({ height, marginTop, title, time, eventId, onOpenPopup }) => {
   console.log('event');
-  console.log(time);
 
   return (
     <>
@@ -30,8 +29,8 @@ Event.propTypes = {
 };
 
 Event.defaultProps = {
-  title: 'Unavailable',
-  time: 'Unavailable',
+  title: 'Title unavailable',
+  time: 'Time unavailable',
 };
 
 export default Event;

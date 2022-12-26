@@ -21,7 +21,7 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
   console.log('day');
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupOpenCoordinates, setPopupOpenCoordinates] = useState({});
+  const [popupCoordinates, setPopupCoordinates] = useState({});
   const [eventIdToDelete, setEventIdToDelete] = useState();
 
   const handleDeleteEvent = () => {
@@ -31,7 +31,9 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
 
   const handleOpenPopup = (e, eventId) => {
     console.log(e);
-    setPopupOpenCoordinates({
+    console.log(e.pageY);
+    console.log(e.pageX);
+    setPopupCoordinates({
       top: e.pageY,
       left: e.pageX,
     });
@@ -64,7 +66,7 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
         <Popup
           onClosePopup={closePopup}
           onGetEvents={onGetEvents}
-          popupOpenCoordinates={popupOpenCoordinates}
+          popupCoordinates={popupCoordinates}
           onDeleteEvent={handleDeleteEvent}
         />
       )}

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './popup.scss';
 
-const Popup = ({ popupOpenCoordinates, onDeleteEvent, onClosePopup }) => {
+const Popup = ({ popupCoordinates, onDeleteEvent, onClosePopup }) => {
   return (
     <div onClick={onClosePopup} className="modal overlay">
       <button
-        style={popupOpenCoordinates}
+        style={popupCoordinates}
         onClick={onDeleteEvent}
         className="button delete-event-btn"
       >
@@ -13,6 +14,16 @@ const Popup = ({ popupOpenCoordinates, onDeleteEvent, onClosePopup }) => {
       </button>
     </div>
   );
+};
+
+Popup.propTypes = {
+  popupCoordinates: PropTypes.objectOf(PropTypes.number),
+  onDeleteEvent: PropTypes.func.isRequired,
+  onClosePopup: PropTypes.func.isRequired,
+};
+
+Popup.defaultProps = {
+  input: '',
 };
 
 export default Popup;

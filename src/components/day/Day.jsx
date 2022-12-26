@@ -6,7 +6,7 @@ import { deleteEvent } from '../../gateway/gateway';
 
 import './day.scss';
 
-const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
+const Day = ({ dataDay, dayEvents, onGetEvents }) => {
   const currentHours = new Date().getHours();
   const [top, setTop] = useState(
     currentHours * 60 - currentHours + new Date().getMinutes()
@@ -52,7 +52,6 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
         );
         return (
           <Hour
-            onGetEventId={onGetEventId}
             onOpenPopup={handleOpenPopup}
             key={dataDay + hour}
             dataHour={hour}
@@ -78,7 +77,6 @@ const Day = ({ dataDay, dayEvents, onGetEventId, onGetEvents }) => {
 Day.propTypes = {
   dataDay: PropTypes.number.isRequired,
   dayEvents: PropTypes.arrayOf(PropTypes.object),
-  onGetEventId: PropTypes.func.isRequired,
   onGetEvents: PropTypes.func.isRequired,
 };
 

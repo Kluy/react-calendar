@@ -1,32 +1,53 @@
 import React, { useState } from 'react';
 import { postEvent } from '../../gateway/gateway';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import './modal.scss';
 
-const Modal = ({ onIsModalOpen, onGetEvents }) => {
+const Modal = ({ onIsModalOpen, events }) => {
+  console.log(events);
+
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
-    date: '',
+    date: moment().format('YYYY-MM-DD'),
     startTime: '',
     endTime: '',
   });
 
-  const handleCreateEvent = (e) => {
+  const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
+  const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
+  const totalTime =
+    (dateTo.getHours() - dateFrom.getHours()) * 60 + (dateTo.getMinutes() - dateFrom.getMinutes());
+
+  console.log(events.filter(event => event.dateFrom.getDate() === dateFrom.getDate()));
+
+  const handleCreateEvent = e => {
     e.preventDefault();
-    const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
-    const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
+
+    console.log(events.filter(event => event.dateFrom.getDate() === dateFrom.getDate()));
+
+    const filteredArr = events.filter(event => event.dateFrom.getDate() === dateFrom.getDate());
+    // const filteredArr2 = events.filter(event => event.dateFrom.getDate() === dateFrom.getDate()).find(event => );
+
     const { title, description } = eventData;
-    postEvent({
-      title,
-      description,
-      dateFrom,
-      dateTo,
-    }).then(() => onGetEvents());
-    onIsModalOpen();
+
+    if (eventData.startTime > eventData.endTime) {
+      alert('Событие заканчивается раньше чем начинается');
+    } else if (totalTime > 360) {
+      alert('Событие дольше 6 часов');
+    } else {
+      postEvent({
+        title,
+        description,
+        dateFrom,
+        dateTo,
+      }).then(() => onGetEvents());
+      onIsModalOpen();
+    }
   };
 
-  const handleSetEventData = (e) => {
+  const handleSetEventData = e => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
 
@@ -46,6 +67,11 @@ const Modal = ({ onIsModalOpen, onGetEvents }) => {
               value={eventData.title}
               onChange={handleSetEventData}
             />
+            {eventData.title ? (
+              ''
+            ) : (
+              <div className="event-form__validation">Введите название события</div>
+            )}
             <div className="event-form__time">
               <input
                 type="date"
@@ -69,6 +95,11 @@ const Modal = ({ onIsModalOpen, onGetEvents }) => {
                 value={eventData.endTime}
                 onChange={handleSetEventData}
               />
+              {totalTime > 360 ? (
+                <div className="event-form__validation">The event must be shorter then 6 hours</div>
+              ) : (
+                ''
+              )}
             </div>
             <textarea
               name="description"
@@ -78,6 +109,9 @@ const Modal = ({ onIsModalOpen, onGetEvents }) => {
               onChange={handleSetEventData}
             ></textarea>
             <button
+              disabled={
+                !eventData.title || !eventData.date || !eventData.endTime || !eventData.startTime
+              }
               type="submit"
               className="event-form__submit-btn"
               onClick={handleCreateEvent}

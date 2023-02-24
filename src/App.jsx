@@ -4,7 +4,6 @@ import Calendar from './components/calendar/Calendar.jsx';
 import Modal from './components/modal/Modal.jsx';
 import moment from 'moment';
 import { fetchData } from './gateway/gateway.js';
-
 import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 
 import './common.scss';
@@ -16,15 +15,15 @@ const App = () => {
   const [events, setEvents] = useState([]);
 
   const getEvents = () => {
-    fetchData().then((result) => {
+    fetchData().then(result => {
       setEvents(
-        result.map((event) => {
+        result.map(event => {
           return {
             ...event,
             dateFrom: new Date(event.dateFrom),
             dateTo: new Date(event.dateTo),
           };
-        })
+        }),
       );
     });
   };
@@ -53,9 +52,7 @@ const App = () => {
   const currentMonthName =
     weekDates[0].getDate() < weekDates[6].getDate()
       ? moment(weekDates[0]).format('MMM')
-      : moment(weekDates[0]).format('MMM') +
-        ' - ' +
-        moment(weekDates[6]).format('MMM');
+      : moment(weekDates[0]).format('MMM') + ' - ' + moment(weekDates[6]).format('MMM');
 
   return (
     <>
@@ -67,9 +64,7 @@ const App = () => {
         onSubtractWeek={handleSubtractWeek}
       />
       <Calendar onGetEvents={getEvents} events={events} weekDates={weekDates} />
-      {isModalOpen ? (
-        <Modal onGetEvents={getEvents} onIsModalOpen={handleIsModalOpen} />
-      ) : null}
+      {isModalOpen ? <Modal events={events} onIsModalOpen={handleIsModalOpen} /> : null}
     </>
   );
 };

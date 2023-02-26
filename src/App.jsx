@@ -64,7 +64,9 @@ const App = () => {
         onSubtractWeek={handleSubtractWeek}
       />
       <Calendar onGetEvents={getEvents} events={events} weekDates={weekDates} />
-      {isModalOpen ? <Modal events={events} onIsModalOpen={handleIsModalOpen} /> : null}
+      {isModalOpen ? (
+        <Modal onGetEvents={getEvents} events={events} onIsModalOpen={handleIsModalOpen} />
+      ) : null}
     </>
   );
 };

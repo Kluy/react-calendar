@@ -38,7 +38,7 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     } else if (!eventData.endTime) {
       alert('Введите время окончания события');
     } else if (eventData.startTime > eventData.endTime) {
-      alert('Неправльно установлено время начала или окончания события');
+      alert('Неправльно указанно время начала или окончания события');
     } else if (eventTotalTime > 21600000) {
       alert('Событие не может быть дольше 6 часов');
     } else if (eventIndex !== -1) {

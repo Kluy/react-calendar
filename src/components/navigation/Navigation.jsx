@@ -6,32 +6,30 @@ import { days } from '../../utils/dateUtils.js';
 import './navigation.scss';
 
 const Navigation = ({ weekDates }) => {
-  const currentDay = new Date();
-
   return (
     <header className="calendar__header">
-      {weekDates.map(date => (
-        <div key={date} className="calendar__day-label day-label">
-          <span
-            className={classNames('day-label__day-name', {
-              'day-label__day-name_current':
-                currentDay.getMonth() === date.getMonth() &&
-                currentDay.getDate() === date.getDate(),
-            })}
-          >
-            {days[date.getDay()]}
-          </span>
-          <span
-            className={classNames('day-label__day-number', {
-              'day-label__day-number_current':
-                currentDay.getMonth() === date.getMonth() &&
-                currentDay.getDate() === date.getDate(),
-            })}
-          >
-            {date.getDate()}
-          </span>
-        </div>
-      ))}
+      {weekDates.map(date => {
+        const isDateCurrent =
+          new Date().getMonth() === date.getMonth() && new Date().getDate() === date.getDate();
+        return (
+          <div key={date} className="calendar__day-label day-label">
+            <span
+              className={classNames('day-label__day-name', {
+                'day-label__day-name_current': isDateCurrent,
+              })}
+            >
+              {days[date.getDay()]}
+            </span>
+            <span
+              className={classNames('day-label__day-number', {
+                'day-label__day-number_current': isDateCurrent,
+              })}
+            >
+              {date.getDate()}
+            </span>
+          </div>
+        );
+      })}
     </header>
   );
 };

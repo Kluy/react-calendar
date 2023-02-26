@@ -20,7 +20,6 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
     const eventTotalTime = dateTo.getTime() - dateFrom.getTime();
 
-    console.log(eventTotalTime);
     const eventIndex = events.findIndex(event => {
       return (
         (dateFrom.getTime() >= event.dateFrom.getTime() &&
@@ -120,6 +119,7 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
 Modal.propTypes = {
   onIsModalOpen: PropTypes.func.isRequired,
   onGetEvents: PropTypes.func.isRequired,
+  events: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Modal;

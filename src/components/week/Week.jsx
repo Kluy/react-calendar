@@ -7,22 +7,15 @@ import './week.scss';
 const Week = ({ weekDates, events, onGetEvents }) => {
   return (
     <div className="calendar__week">
-      {weekDates.map((dayStart) => {
-        const dayEnd = new Date(dayStart.getTime()).setHours(
-          dayStart.getHours() + 24
-        );
+      {weekDates.map(day => {
+        const dayEnd = new Date(day.getTime()).setHours(day.getHours() + 24);
 
         //getting all events from the day we will render
-        const dayEvents = events.filter((event) => {
-          return event.dateFrom > dayStart && event.dateTo < dayEnd;
+        const dayEvents = events.filter(event => {
+          return event.dateFrom > day && event.dateTo < dayEnd;
         });
         return (
-          <Day
-            onGetEvents={onGetEvents}
-            key={dayStart.getDate()}
-            dataDay={dayStart.getDate()}
-            dayEvents={dayEvents}
-          />
+          <Day onGetEvents={onGetEvents} key={day.getDate()} day={day} dayEvents={dayEvents} />
         );
       })}
     </div>

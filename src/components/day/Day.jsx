@@ -6,14 +6,16 @@ import { deleteEvent } from '../../gateway/gateway';
 
 import './day.scss';
 
-const Day = ({ dataDay, dayEvents, onGetEvents }) => {
-  const currentDay = dataDay === new Date().getDate();
-  const currentHours = new Date().getHours();
-  const [top, setTop] = useState(
-    currentHours * 60 - currentHours + new Date().getMinutes()
-  );
+const Day = ({ day, dayEvents, onGetEvents }) => {
+  const dayNumber = day.getDate();
+  const currentDate = new Date();
+  const isDayCurrent =
+    dayNumber === currentDate.getDate() && day.getMonth() === currentDate.getMonth();
+  const currentHours = currentDate.getHours();
 
-  if (currentDay) {
+  const [top, setTop] = useState(currentHours * 60 - currentHours + currentDate.getMinutes());
+
+  if (isDayCurrent) {
     setTimeout(() => setTop(top + 1), 60000);
   }
 
@@ -44,16 +46,14 @@ const Day = ({ dataDay, dayEvents, onGetEvents }) => {
   };
 
   return (
-    <div className="calendar__day" data-day={dataDay}>
-      {hours.map((hour) => {
+    <div className="calendar__day" data-day={dayNumber}>
+      {hours.map(hour => {
         //getting all events from the day we will render
-        const hourEvents = dayEvents.filter(
-          (event) => event.dateFrom.getHours() === hour
-        );
+        const hourEvents = dayEvents.filter(event => event.dateFrom.getHours() === hour);
         return (
           <Hour
             onOpenPopup={handleOpenPopup}
-            key={dataDay + hour}
+            key={dayNumber + hour}
             dataHour={hour}
             hourEvents={hourEvents}
           />
@@ -67,13 +67,13 @@ const Day = ({ dataDay, dayEvents, onGetEvents }) => {
           onDeleteEvent={handleDeleteEvent}
         />
       )}
-      {currentDay && <div style={{ top }} className="line"></div>}
+      {isDayCurrent && <div style={{ top }} className="line"></div>}
     </div>
   );
 };
 
 Day.propTypes = {
-  dataDay: PropTypes.number.isRequired,
+  day: PropTypes.instanceOf(Date).isRequired,
   dayEvents: PropTypes.arrayOf(PropTypes.object),
   onGetEvents: PropTypes.func.isRequired,
 };

@@ -19,6 +19,8 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
     const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
     const eventTotalTime = dateTo.getTime() - dateFrom.getTime();
+
+    console.log(eventTotalTime);
     const eventIndex = events.findIndex(event => {
       return (
         (dateFrom.getTime() >= event.dateFrom.getTime() &&
@@ -30,19 +32,19 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     const { title, description } = eventData;
 
     if (!eventData.title) {
-      alert('Введите название события');
+      alert('Event title is empty. Please, add event title');
     } else if (!eventData.date) {
-      alert('Введите дату события');
+      alert('Event date is empty. Please, add event date');
     } else if (!eventData.startTime) {
-      alert('Введите время начала события');
+      alert('Event start time is empty. Please, add event start time');
     } else if (!eventData.endTime) {
-      alert('Введите время окончания события');
-    } else if (eventData.startTime > eventData.endTime) {
-      alert('Неправльно указанно время начала или окончания события');
+      alert('Event end time is empty. Please, add event end time');
+    } else if (eventTotalTime < 0) {
+      alert('End time before start time');
     } else if (eventTotalTime > 21600000) {
-      alert('Событие не может быть дольше 6 часов');
+      alert('Event can not be longer then 6 hours');
     } else if (eventIndex !== -1) {
-      alert('На это время событие уже назначено');
+      alert('You have already event in this time');
     } else {
       postEvent({
         title,
@@ -74,11 +76,6 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
               value={eventData.title}
               onChange={handleSetEventData}
             />
-            {/* {eventData.title ? (
-              ''
-            ) : (
-              <div className="event-form__validation">Введите название события</div>
-            )} */}
             <div className="event-form__time">
               <input
                 type="date"
@@ -102,11 +99,6 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
                 value={eventData.endTime}
                 onChange={handleSetEventData}
               />
-              {/* {eventTotalTime > 21600000 ? (
-                <div className="event-form__validation">The event must be shorter then 6 hours</div>
-              ) : (
-                ''
-              )} */}
             </div>
             <textarea
               name="description"
@@ -115,14 +107,7 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
               defaultValue={eventData.description}
               onChange={handleSetEventData}
             ></textarea>
-            <button
-              // disabled={
-              //   !eventData.title || !eventData.date || !eventData.endTime || !eventData.startTime
-              // }
-              type="submit"
-              className="event-form__submit-btn"
-              onClick={handleCreateEvent}
-            >
+            <button type="submit" className="event-form__submit-btn" onClick={handleCreateEvent}>
               Create
             </button>
           </form>

@@ -5,8 +5,6 @@ import moment from 'moment';
 import './modal.scss';
 
 const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
-  console.log(events);
-
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -15,39 +13,36 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     endTime: '',
   });
 
-  const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
-  const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
-  const eventTotalTime = dateTo.getTime() - dateFrom.getTime();
-
-  const eventIndex = events.findIndex(event => {
-    return (
-      (dateFrom.getTime() >= event.dateFrom.getTime() &&
-        dateFrom.getTime() <= event.dateTo.getTime()) ||
-      (dateTo.getTime() >= event.dateFrom.getTime() && dateTo.getTime() <= event.dateTo.getTime())
-    );
-  });
-
   const handleCreateEvent = e => {
     e.preventDefault();
 
-    // console.log(events.filter(event => event.dateFrom.getDate() === dateFrom.getDate()));
+    const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
+    const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
+    const eventTotalTime = dateTo.getTime() - dateFrom.getTime();
+    const eventIndex = events.findIndex(event => {
+      return (
+        (dateFrom.getTime() >= event.dateFrom.getTime() &&
+          dateFrom.getTime() <= event.dateTo.getTime()) ||
+        (dateTo.getTime() >= event.dateFrom.getTime() && dateTo.getTime() <= event.dateTo.getTime())
+      );
+    });
 
-    // const filteredArr = events
-    //   .filter(event => event.dateFrom.getDate() === dateFrom.getDate())
-    //   .includes(
-    //     event =>
-    //       event.dateFrom.getDate() < dateFrom.getDate() < event.dateTo.getDate() ||
-    //       event.dateFrom.getDate() < dateTo.getDate() < event.dateTo.getDate(),
-    //   );
-    // const filteredArr2 = events.filter(event => event.dateFrom.getDate() === dateFrom.getDate()).find(event => );
-
-    // console.log(filteredArr);
     const { title, description } = eventData;
 
-    if (eventData.startTime > eventData.endTime) {
-      alert('Событие заканчивается раньше чем начинается');
+    if (!eventData.title) {
+      alert('Введите название события');
+    } else if (!eventData.date) {
+      alert('Введите дату события');
+    } else if (!eventData.startTime) {
+      alert('Введите время начала события');
+    } else if (!eventData.endTime) {
+      alert('Введите время окончания события');
+    } else if (eventData.startTime > eventData.endTime) {
+      alert('Неправльно установлено время начала или окончания события');
     } else if (eventTotalTime > 21600000) {
-      alert('Событие дольше 6 часов');
+      alert('Событие не может быть дольше 6 часов');
+    } else if (eventIndex !== -1) {
+      alert('На это время событие уже назначено');
     } else {
       postEvent({
         title,
@@ -79,11 +74,11 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
               value={eventData.title}
               onChange={handleSetEventData}
             />
-            {eventData.title ? (
+            {/* {eventData.title ? (
               ''
             ) : (
               <div className="event-form__validation">Введите название события</div>
-            )}
+            )} */}
             <div className="event-form__time">
               <input
                 type="date"
@@ -107,11 +102,11 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
                 value={eventData.endTime}
                 onChange={handleSetEventData}
               />
-              {eventTotalTime > 21600000 ? (
+              {/* {eventTotalTime > 21600000 ? (
                 <div className="event-form__validation">The event must be shorter then 6 hours</div>
               ) : (
                 ''
-              )}
+              )} */}
             </div>
             <textarea
               name="description"
@@ -121,9 +116,9 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
               onChange={handleSetEventData}
             ></textarea>
             <button
-              disabled={
-                !eventData.title || !eventData.date || !eventData.endTime || !eventData.startTime
-              }
+              // disabled={
+              //   !eventData.title || !eventData.date || !eventData.endTime || !eventData.startTime
+              // }
               type="submit"
               className="event-form__submit-btn"
               onClick={handleCreateEvent}

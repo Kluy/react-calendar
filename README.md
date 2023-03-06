@@ -25,9 +25,12 @@
 
 <h2>Instruction</h2>
 <h3>npm start</h3>
-<p>Runs the app in the development mode. The app will be opened automatically at http://localhost:8080 or open it manually by this link in your browser</p>
-<p>The page will be realoaded when changes are made. You may also see any lint errores in the console.</p>
+<p>Runs the app in the development mode.
+The app will be opened automatically at http://localhost:8080 or open it manually by this link in your browser</p>
+<p>The page will be realoaded when changes are made. 
+You may also see any lint errores in the console.</p>
 <h3>npm run build</h3>
-<p>Compile the production build to the dist folder. Correctly bundles React in production mode and optimizes the build for the best performance.</p>
+<p>Compile the production build to the dist folder.
+Correctly bundles React in production mode and optimizes the build for the best performance.</p>
 <p>The build is minified.
 App is ready to be deployed.</p>

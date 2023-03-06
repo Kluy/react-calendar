@@ -22,3 +22,9 @@
 <ul>
     <li>Andrii Kliui</li>
 </ul>
+
+<h3>npm start</h3>
+<p>Runs the app in the development mode.
+Open http://localhost:8000 to viev it in your browser</p>
+
+<h3></h3>

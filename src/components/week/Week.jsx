@@ -12,7 +12,7 @@ const Week = ({ weekDates, events, onGetEvents }) => {
 
         //getting all events from the day we will render
         const dayEvents = events.filter(event => {
-          return event.dateFrom > day && event.dateTo < dayEnd;
+          return event.dateFrom >= day && event.dateTo < dayEnd;
         });
         return (
           <Day onGetEvents={onGetEvents} key={day.getDate()} day={day} dayEvents={dayEvents} />

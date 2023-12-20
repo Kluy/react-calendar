@@ -17,15 +17,20 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     e.preventDefault();
 
     const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
+    console.log('dateFrom');
+    console.log(dateFrom);
     const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
     const eventTotalTime = dateTo.getTime() - dateFrom.getTime();
 
-    const eventIndex = events.findIndex(event => {
+    const newEvent = events.every(event => {
       return (
-        (dateFrom.getTime() >= event.dateFrom.getTime() &&
-          dateFrom.getTime() <= event.dateTo.getTime()) ||
-        (dateTo.getTime() >= event.dateFrom.getTime() && dateTo.getTime() <= event.dateTo.getTime())
+        event.dateFrom.getTime() > dateTo.getTime() || event.dateTo.getTime() < dateFrom.getTime()
       );
+      // return (
+      //   (dateFrom.getTime() >= event.dateFrom.getTime() &&
+      //     dateFrom.getTime() <= event.dateTo.getTime()) ||
+      //   (dateTo.getTime() >= event.dateFrom.getTime() && dateTo.getTime() <= event.dateTo.getTime())
+      // );
     });
 
     const { title, description } = eventData;
@@ -42,7 +47,7 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
       alert('End time before start time');
     } else if (eventTotalTime > 21600000) {
       alert('Event can not be longer then 6 hours');
-    } else if (eventIndex !== -1) {
+    } else if (!newEvent) {
       alert('You have already event in this time');
     } else {
       postEvent({

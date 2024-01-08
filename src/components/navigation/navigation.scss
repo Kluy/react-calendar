@@ -18,7 +18,7 @@
 
 .day-label {
   &__day-number {
-    padding: 10px;
+    padding: 9px 15px;
 
     &_current {
       color: #fff;
@@ -35,5 +35,4 @@
       color: #003dff;
     }
   }
-
 }

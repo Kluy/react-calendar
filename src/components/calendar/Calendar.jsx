@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Navigation from './../navigation/Navigation';
+import Navigation from '../navigation/Navigation';
 import Week from '../week/Week';
 import Sidebar from '../sidebar/Sidebar';
 import PropTypes from 'prop-types';
@@ -14,11 +13,7 @@ const Calendar = ({ weekDates, events, onGetEvents }) => {
       <div className="calendar__body">
         <div className="calendar__week-container">
           <Sidebar />
-          <Week
-            onGetEvents={onGetEvents}
-            weekDates={weekDates}
-            events={events}
-          />
+          <Week onGetEvents={onGetEvents} weekDates={weekDates} events={events} />
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { days } from '../../utils/dateUtils.js';
+import { days } from '/src/utils/dateUtils.js';
 
 import './navigation.scss';
 

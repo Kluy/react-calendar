@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Hour from '../hour/Hour';
 import Popup from '../popup/Popup';
 import PropTypes from 'prop-types';
-import { deleteEvent } from '../../gateway/gateway';
+import { deleteEvent } from '/src/gateway/gateway';
 
 import './day.scss';
 
@@ -21,7 +21,7 @@ const Day = ({ day, dayEvents, onGetEvents }) => {
 
   const hours = Array(24)
     .fill()
-    .map((val, index) => index);
+    .map((_, index) => index);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupCoordinates, setPopupCoordinates] = useState({});
@@ -48,7 +48,6 @@ const Day = ({ day, dayEvents, onGetEvents }) => {
   return (
     <div className="calendar__day" data-day={dayNumber}>
       {hours.map(hour => {
-        //getting all events from the day we will render
         const hourEvents = dayEvents.filter(event => event.dateFrom.getHours() === hour);
         return (
           <Hour

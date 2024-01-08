@@ -4,7 +4,7 @@ import Calendar from './components/calendar/Calendar.jsx';
 import Modal from './components/modal/Modal.jsx';
 import moment from 'moment';
 import { fetchData } from './gateway/gateway.js';
-import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
+import { getWeekStartDate, generateWeekRange } from './utils/dateUtils.js';
 
 import './common.scss';
 
@@ -64,9 +64,9 @@ const App = () => {
         onSubtractWeek={handleSubtractWeek}
       />
       <Calendar onGetEvents={getEvents} events={events} weekDates={weekDates} />
-      {isModalOpen ? (
+      {isModalOpen && (
         <Modal onGetEvents={getEvents} events={events} onIsModalOpen={handleIsModalOpen} />
-      ) : null}
+      )}
     </>
   );
 };

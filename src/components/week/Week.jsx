@@ -10,7 +10,6 @@ const Week = ({ weekDates, events, onGetEvents }) => {
       {weekDates.map(day => {
         const dayEnd = new Date(day.getTime()).setHours(day.getHours() + 24);
 
-        //getting all events from the day we will render
         const dayEvents = events.filter(event => {
           return event.dateFrom >= day && event.dateTo < dayEnd;
         });

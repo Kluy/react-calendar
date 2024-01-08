@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { postEvent } from '../../gateway/gateway';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { postEvent } from '/src/gateway/gateway';
+
 import './modal.scss';
 
 const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
@@ -13,35 +14,29 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     endTime: '',
   });
 
+  postEvent;
+
   const handleCreateEvent = e => {
     e.preventDefault();
 
     const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
-    console.log('dateFrom');
-    console.log(dateFrom);
     const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
     const eventTotalTime = dateTo.getTime() - dateFrom.getTime();
 
-    const newEvent = events.every(event => {
-      return (
-        event.dateFrom.getTime() > dateTo.getTime() || event.dateTo.getTime() < dateFrom.getTime()
-      );
-      // return (
-      //   (dateFrom.getTime() >= event.dateFrom.getTime() &&
-      //     dateFrom.getTime() <= event.dateTo.getTime()) ||
-      //   (dateTo.getTime() >= event.dateFrom.getTime() && dateTo.getTime() <= event.dateTo.getTime())
-      // );
-    });
+    const newEvent = events.every(
+      event =>
+        event.dateFrom.getTime() > dateTo.getTime() || event.dateTo.getTime() < dateFrom.getTime(),
+    );
 
-    const { title, description } = eventData;
+    const { title, description, date, startTime, endTime } = eventData;
 
-    if (!eventData.title) {
+    if (!title) {
       alert('Event title is empty. Please, add event title');
-    } else if (!eventData.date) {
+    } else if (!date) {
       alert('Event date is empty. Please, add event date');
-    } else if (!eventData.startTime) {
+    } else if (!startTime) {
       alert('Event start time is empty. Please, add event start time');
-    } else if (!eventData.endTime) {
+    } else if (!endTime) {
       alert('Event end time is empty. Please, add event end time');
     } else if (eventTotalTime < 0) {
       alert('End time before start time');

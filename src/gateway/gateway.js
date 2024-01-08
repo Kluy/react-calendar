@@ -1,7 +1,6 @@
-const baseUrl =
-  'https://6390e3db0bf398c73a95f78a.mockapi.io/calendar/events-react/';
+const baseUrl = 'https://6390e3db0bf398c73a95f78a.mockapi.io/calendar/events-react/';
 
-export const postEvent = (newEvent) =>
+export const postEvent = newEvent =>
   fetch(`${baseUrl}`, {
     method: 'POST',
     headers: {
@@ -9,15 +8,15 @@ export const postEvent = (newEvent) =>
     },
     body: JSON.stringify(newEvent),
   })
-    .then((response) => response.json())
-    .catch(() => alert('Internal Server Error. Can"t display events'));
+    .then(response => response.json())
+    .catch(() => alert("Internal Server Error. Can't display events"));
 
-export const deleteEvent = (taskId) =>
+export const deleteEvent = taskId =>
   fetch(`${baseUrl}${taskId}`, { method: 'DELETE' })
-    .then((response) => response.json())
-    .catch(() => alert('Internal Server Error. Can"t display events'));
+    .then(response => response.json())
+    .catch(() => alert("Internal Server Error. Can't display events"));
 
 export const fetchData = () =>
   fetch(`${baseUrl}`)
-    .then((response) => response.json())
-    .catch(() => alert('Internal Server Error. Can"t display events'));
+    .then(response => response.json())
+    .catch(() => alert("Internal Server Error. Can't display events"));

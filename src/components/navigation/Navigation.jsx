@@ -7,7 +7,7 @@ import './navigation.scss';
 
 const Navigation = ({ weekDates }) => {
   return (
-    <header className="calendar__header">
+    <div className="calendar__header">
       {weekDates.map(date => {
         const isDateCurrent =
           new Date().getMonth() === date.getMonth() && new Date().getDate() === date.getDate();
@@ -30,7 +30,7 @@ const Navigation = ({ weekDates }) => {
           </div>
         );
       })}
-    </header>
+    </div>
   );
 };
 

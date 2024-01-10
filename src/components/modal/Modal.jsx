@@ -14,8 +14,6 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
     endTime: '',
   });
 
-  postEvent;
-
   const handleCreateEvent = e => {
     e.preventDefault();
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { postEvent } from '/src/gateway/gateway';
+import { getDate } from '/src/utils/dateUtils';
+import { checkEventCrossing, checkEventDuration, checkEventData } from '/src/utils/eventUtils';
 
 import './modal.scss';
 
@@ -17,39 +19,22 @@ const Modal = ({ onIsModalOpen, events, onGetEvents }) => {
   const handleCreateEvent = e => {
     e.preventDefault();
 
-    const dateFrom = new Date(`${eventData.date}T${eventData.startTime}`);
-    const dateTo = new Date(`${eventData.date}T${eventData.endTime}`);
-    const eventTotalTime = dateTo.getTime() - dateFrom.getTime();
-
-    const newEvent = events.every(
-      event =>
-        event.dateFrom.getTime() > dateTo.getTime() || event.dateTo.getTime() < dateFrom.getTime(),
-    );
-
     const { title, description, date, startTime, endTime } = eventData;
 
-    if (!title) {
-      alert('Event title is empty. Please, add event title');
-    } else if (!date) {
-      alert('Event date is empty. Please, add event date');
-    } else if (!startTime) {
-      alert('Event start time is empty. Please, add event start time');
-    } else if (!endTime) {
-      alert('Event end time is empty. Please, add event end time');
-    } else if (eventTotalTime < 0) {
-      alert('End time before start time');
-    } else if (eventTotalTime > 21600000) {
-      alert('Event can not be longer then 6 hours');
-    } else if (!newEvent) {
-      alert('You have already event in this time');
-    } else {
-      postEvent({
-        title,
-        description,
-        dateFrom,
-        dateTo,
-      }).then(() => onGetEvents());
-      onIsModalOpen();
+    if (checkEventData(title, date, startTime, endTime)) {
+      const dateFrom = getDate(date, startTime);
+      const dateTo = getDate(date, endTime);
+      const timeFrom = dateFrom.getTime();
+      const timeTo = dateTo.getTime();
+      if (checkEventDuration(timeFrom, timeTo) && checkEventCrossing(events, timeFrom, timeTo)) {
+        postEvent({
+          title,
+          description,
+          dateFrom,
+          dateTo,
+        }).then(() => onGetEvents());
+        onIsModalOpen();
+      }
     }
   };
 

@@ -23,6 +23,8 @@ export const getDateTime = (date, time) => {
   return withMinutes;
 };
 
+export const getDate = (date, time) => new Date(`${date}T${time}`);
+
 export const formatMins = mins => {
   return mins < 10 ? `0${mins}` : mins;
 };

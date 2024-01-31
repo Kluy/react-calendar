@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = (env, argv) => {
@@ -11,7 +11,6 @@ module.exports = (env, argv) => {
     output: {
       filename: 'bundle.js',
       publicPath: '/',
-
     },
     module: {
       rules: [
@@ -35,11 +34,11 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new CopyPlugin({
-      patterns: [
-        { from: '_redirects', to: '' },
-        // { from: "source/url/to/images/folder", to: "dest/url/to/images/folder" },
-      ],
-    }),
+        patterns: [
+          { from: '_redirects', to: '' },
+          // { from: "source/url/to/images/folder", to: "dest/url/to/images/folder" },
+        ],
+      }),
       new webpack.ProgressPlugin(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
